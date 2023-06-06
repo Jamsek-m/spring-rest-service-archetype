@@ -1,0 +1,21 @@
+version: "3.3"
+
+services:
+  db:
+    container_name: ${artifactId}-pg
+    image: postgres:15
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: ${artifactId}
+    ports:
+      - "5432:5432"
+    volumes:
+      - type: bind
+        source: init.sql
+        target: /docker-entrypoint-initdb.d/init.sql
+        read_only: true
+      - ${artifactId}-pg-data:/var/lib/postgresql/data
+
+volumes:
+  ${artifactId}-pg-data:

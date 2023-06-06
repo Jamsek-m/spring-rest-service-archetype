@@ -1,0 +1,279 @@
+<archetype-descriptor
+        xsi:schemaLocation="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0
+            http://maven.apache.org/xsd/archetype-descriptor-1.0.0.xsd"
+        xmlns="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        name="quickstart">
+    <requiredProperties>
+        <requiredProperty key="version">
+            <defaultValue>1.0.0-SNAPSHOT</defaultValue>
+        </requiredProperty>
+        <requiredProperty key="parentVersion">
+            <defaultValue>${project.version}</defaultValue>
+        </requiredProperty>
+        <requiredProperty key="gitignore">
+            <defaultValue>.gitignore</defaultValue>
+        </requiredProperty>
+    </requiredProperties>
+
+    <fileSets>
+        <!-- v1 -->
+        <fileSet filtered="true" encoding="UTF-8">
+            <directory>v1</directory>
+            <includes>
+                <include>pom.xml</include>
+            </includes>
+        </fileSet>
+
+        <!-- API v1 -->
+        <fileSet filtered="true" encoding="UTF-8">
+            <directory>v1/api</directory>
+            <includes>
+                <include>pom.xml</include>
+            </includes>
+        </fileSet>
+        <fileSet filtered="true" encoding="UTF-8">
+            <directory>v1/api/src/main/resources</directory>
+            <includes>
+                <include>application.yml</include>
+                <include>application-dev.yml</include>
+                <include>application-prod.yml</include>
+                <include>version.json</include>
+            </includes>
+        </fileSet>
+        <fileSet filtered="true" encoding="UTF-8">
+            <directory>v1/api/src/main/java/__packageInPathFormat__/api</directory>
+            <includes>
+                <include>RestApplication.java</include>
+            </includes>
+        </fileSet>
+        <fileSet filtered="true" encoding="UTF-8">
+            <directory>v1/api/src/main/java/__packageInPathFormat__/api/config</directory>
+            <includes>
+                <include>OpenAPIConfig.java</include>
+                <include>WebConfig.java</include>
+            </includes>
+        </fileSet>
+        <fileSet filtered="true" encoding="UTF-8">
+            <directory>v1/api/src/main/java/__packageInPathFormat__/api/endpoints</directory>
+        </fileSet>
+        <fileSet filtered="true" encoding="UTF-8">
+            <directory>v1/api/src/main/java/__packageInPathFormat__/api/mappers</directory>
+            <includes>
+                <include>DefaultExceptionMapper.java</include>
+                <include>GenericExceptionMapper.java</include>
+            </includes>
+        </fileSet>
+        <fileSet filtered="true" encoding="UTF-8">
+            <directory>v1/api/src/main/java/__packageInPathFormat__/api/resolvers</directory>
+            <includes>
+                <include>RestParamsResolver.java</include>
+            </includes>
+        </fileSet>
+
+        <!-- LIB v1 -->
+        <fileSet filtered="true" encoding="UTF-8">
+            <directory>v1/lib</directory>
+            <includes>
+                <include>pom.xml</include>
+            </includes>
+        </fileSet>
+        <fileSet filtered="true" encoding="UTF-8">
+            <directory>v1/lib/src/main/java/__packageInPathFormat__/lib</directory>
+        </fileSet>
+        <fileSet filtered="true" encoding="UTF-8">
+            <directory>v1/lib/src/main/java/__packageInPathFormat__/lib</directory>
+            <includes>
+                <include>BaseType.java</include>
+                <include>RevisionBaseType.java</include>
+            </includes>
+        </fileSet>
+        <fileSet filtered="true" encoding="UTF-8">
+            <directory>v1/lib/src/main/java/__packageInPathFormat__/lib/exceptions</directory>
+            <includes>
+                <include>BadRequestException.java</include>
+                <include>ErrorCode.java</include>
+                <include>ErrorParam.java</include>
+                <include>ResourceNotFoundException.java</include>
+                <include>RestException.java</include>
+                <include>TooManyRequestsException.java</include>
+                <include>UnauthorizedException.java</include>
+                <include>ValidationError.java</include>
+                <include>ValidationException.java</include>
+            </includes>
+        </fileSet>
+
+        <!-- SERVICES -->
+        <fileSet filtered="true" encoding="UTF-8">
+            <directory>services</directory>
+            <includes>
+                <include>pom.xml</include>
+            </includes>
+        </fileSet>
+
+        <!-- SERVICES COMMON -->
+        <fileSet filtered="true" encoding="UTF-8">
+            <directory>services/common</directory>
+            <includes>
+                <include>pom.xml</include>
+            </includes>
+        </fileSet>
+        <fileSet filtered="true" encoding="UTF-8">
+            <directory>services/common/src/main/java/__packageInPathFormat__/services/common/auth</directory>
+            <includes>
+                <include>CurrentUser.java</include>
+            </includes>
+        </fileSet>
+        <fileSet filtered="true" encoding="UTF-8">
+            <directory>services/common/src/main/java/__packageInPathFormat__/services/common/config</directory>
+            <includes>
+                <include>SecurityConfig.java</include>
+            </includes>
+        </fileSet>
+        <fileSet filtered="true" encoding="UTF-8">
+            <directory>services/common/src/main/java/__packageInPathFormat__/services/common/mappers</directory>
+            <includes>
+                <include>BaseMapper.java</include>
+            </includes>
+        </fileSet>
+        <fileSet filtered="true" encoding="UTF-8">
+            <directory>services/common/src/main/java/__packageInPathFormat__/services/common/types</directory>
+            <includes>
+                <include>OffsetPageRequest.java</include>
+                <include>QueryResult.java</include>
+                <include>RestParams.java</include>
+                <include>VoidFunc.java</include>
+            </includes>
+        </fileSet>
+        <fileSet filtered="true" encoding="UTF-8">
+            <directory>services/common/src/main/java/__packageInPathFormat__/services/common/utils</directory>
+            <includes>
+                <include>SetterUtils.java</include>
+            </includes>
+        </fileSet>
+        <fileSet filtered="true" encoding="UTF-8">
+            <directory>services/common/src/main/java/__packageInPathFormat__/services/common/validation</directory>
+            <includes>
+                <include>Validator.java</include>
+            </includes>
+        </fileSet>
+
+        <!-- SERVICES DATA -->
+        <fileSet filtered="true" encoding="UTF-8">
+            <directory>services/data</directory>
+            <includes>
+                <include>pom.xml</include>
+            </includes>
+        </fileSet>
+        <fileSet filtered="true" encoding="UTF-8">
+            <directory>services/data/src/main/java/__packageInPathFormat__/services/data/repositories</directory>
+        </fileSet>
+        <fileSet filtered="true" encoding="UTF-8">
+            <directory>services/data/src/main/java/__packageInPathFormat__/services/data/services</directory>
+        </fileSet>
+        <fileSet filtered="true" encoding="UTF-8">
+            <directory>services/data/src/main/java/__packageInPathFormat__/services/data/services/impl</directory>
+        </fileSet>
+
+        <!-- SERVICES ORCHESTRATION -->
+        <fileSet filtered="true" encoding="UTF-8">
+            <directory>services/orchestration</directory>
+            <includes>
+                <include>pom.xml</include>
+            </includes>
+        </fileSet>
+        <fileSet filtered="true" encoding="UTF-8">
+            <directory>services/orchestration/src/main/java/__packageInPathFormat__/services/orchestration/services/impl</directory>
+            <includes>
+                <include>UserContext.java</include>
+            </includes>
+        </fileSet>
+
+        <!-- PERSISTENCE -->
+        <fileSet filtered="true" encoding="UTF-8">
+            <directory>persistence</directory>
+            <includes>
+                <include>pom.xml</include>
+            </includes>
+        </fileSet>
+
+        <!-- PERSISTENCE COMMON -->
+        <fileSet filtered="true" encoding="UTF-8">
+            <directory>persistence/common</directory>
+            <includes>
+                <include>pom.xml</include>
+            </includes>
+        </fileSet>
+        <fileSet filtered="true" encoding="UTF-8">
+            <directory>persistence/common/src/main/java/__packageInPathFormat__/persistence/common/entities</directory>
+            <includes>
+                <include>BaseEntity.java</include>
+                <include>RevisionEntity.java</include>
+            </includes>
+        </fileSet>
+        <fileSet filtered="true" encoding="UTF-8">
+            <directory>persistence/common/src/main/java/__packageInPathFormat__/persistence/common/types</directory>
+            <includes>
+                <include>JsonNodeDatabaseType.java</include>
+            </includes>
+        </fileSet>
+
+        <!-- PERSISTENCE MODELS -->
+        <fileSet filtered="true" encoding="UTF-8">
+            <directory>persistence/models</directory>
+            <includes>
+                <include>pom.xml</include>
+            </includes>
+        </fileSet>
+        <fileSet filtered="true" encoding="UTF-8">
+            <directory>persistence/models/src/main/java/__packageInPathFormat__/persistence/models</directory>
+        </fileSet>
+        <fileSet filtered="true" encoding="UTF-8">
+            <directory>persistence/models/src/main/resources/db</directory>
+            <includes>
+                <include>db.master.xml</include>
+            </includes>
+        </fileSet>
+
+        <!-- OTHER -->
+        <fileSet filtered="true" encoding="UTF-8">
+            <directory />
+            <includes>
+                <include>Dockerfile</include>
+                <include>README.md</include>
+            </includes>
+        </fileSet>
+        <fileSet encoding="UTF-8">
+            <directory />
+            <includes>
+                <include>__gitignore__</include>
+            </includes>
+        </fileSet>
+        <fileSet encoding="UTF-8">
+            <directory />
+            <includes>
+                <include>lombok.config</include>
+            </includes>
+        </fileSet>
+        <fileSet encoding="UTF-8">
+            <directory>docs</directory>
+            <includes>
+                <include>.gitkeep</include>
+            </includes>
+        </fileSet>
+        <fileSet filtered="true" encoding="UTF-8">
+            <directory>.deploy</directory>
+            <includes>
+                <include>docker-compose.dev.yml</include>
+                <include>docker-compose.yml</include>
+            </includes>
+        </fileSet>
+        <fileSet encoding="UTF-8">
+            <directory>.deploy</directory>
+            <includes>
+                <include>init.sql</include>
+            </includes>
+        </fileSet>
+    </fileSets>
+
+</archetype-descriptor>

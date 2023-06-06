@@ -1,0 +1,32 @@
+spring:
+  profiles:
+    active:
+      - dev
+  jpa:
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+  liquibase:
+    change-log: classpath:/db/db.master.xml
+
+server:
+  port: 8080
+  servlet:
+    context-path: /v1
+
+springdoc:
+  swagger-ui:
+    path: /docs/ui
+  api-docs:
+    path: /docs/openapi
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  health:
+    diskspace:
+      enabled: false

@@ -1,0 +1,7 @@
+{
+    "version": "@project.version@",
+    "buildNumber": "@env.SERVICE_META_BUILD_NUMBER@",
+    "buildTimestamp": "@timestamp@",
+    "branch": "@env.SERVICE_META_BRANCH@",
+    "commitSha": "@env.SERVICE_META_COMMIT_SHA@"
+}
