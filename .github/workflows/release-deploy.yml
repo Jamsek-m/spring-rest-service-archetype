@@ -37,7 +37,7 @@ jobs:
       - name: Deploy archetype
         run: mvn -B deploy --settings .ci/settings.xml
         env:
-          GITHUB_TOKEN: ${{ inputs.github-token }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   create-release:
     runs-on: ubuntu-latest
