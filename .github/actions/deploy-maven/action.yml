@@ -19,4 +19,5 @@ runs:
         cache: 'maven'
 
     - name: Deploy archetype
+      shell: bash
       run: mvn -B deploy --settings ${{ inputs.mvn-settings-path }}
