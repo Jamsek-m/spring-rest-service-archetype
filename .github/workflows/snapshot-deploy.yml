@@ -21,7 +21,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Deploy
-        uses: ./.github/actions/deploy-maven
+      - name: Setup JDK
+        uses: actions/setup-java@v4
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          java-version: '21'
+          distribution: 'corretto'
+          cache: 'maven'
+
+      - name: Deploy snapshot
+        run: mvn -B deploy --settings .ci/settings.xml
+        env:
+          GITHUB_TOKEN: ${{ inputs.github-token }}
