@@ -6,7 +6,7 @@
 
     <groupId>com.mjamsek.spring.archetype</groupId>
     <artifactId>spring-rest-archetype</artifactId>
-    <version>1.4.0</version>
+    <version>1.5.0-SNAPSHOT</version>
     <packaging>maven-archetype</packaging>
 
     <build>
