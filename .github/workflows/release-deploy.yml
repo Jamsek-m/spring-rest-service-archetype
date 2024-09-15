@@ -16,15 +16,26 @@ jobs:
     permissions:
       contents: read
       packages: write
+    outputs:
+      version: ${{ steps.version.outputs.version }}
     steps:
 
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Deploy
-        uses: ./.github/actions/deploy-maven
+      - name: Setup JDK
+        uses: actions/setup-java@v4
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          java-version: '21'
+          distribution: 'corretto'
+          cache: 'maven'
+
+      - name: Read version
+        id: version
+        run: echo "version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> "$GITHUB_OUTPUT"
+
+      - name: Deploy archetype
+        run: mvn -B deploy --settings .ci/settings.xml
 
   create-release:
     runs-on: ubuntu-latest
@@ -33,15 +44,10 @@ jobs:
     permissions:
       contents: write
     steps:
-
-      - name: Read version
-        id: version
-        run: echo "version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> "$GITHUB_OUTPUT"
-
       - name: Create release
         uses: softprops/action-gh-release@v2
         with:
-          name: v${{ steps.version.outputs.version }}
+          name: v${{ needs.deploy.outputs.version }}
           tag_name: ${{ github.ref_name }}
           generate_release_notes: true
           draft: false
