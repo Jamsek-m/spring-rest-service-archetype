@@ -1,9 +1,9 @@
 name: Snapshot deploy
 
 on:
-  release:
-    types:
-      - published
+  push:
+    branches:
+      - master
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
