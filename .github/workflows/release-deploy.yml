@@ -2,8 +2,8 @@ name: Release deploy
 
 on:
   push:
-    branches:
-      - master
+    tags:
+      - 'v*'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -14,28 +14,16 @@ jobs:
   precheck:
     runs-on: ubuntu-latest
     outputs:
-      version: v${{ steps.version.outputs.version }}
       tag_exists: ${{ steps.tag-check.outputs.exists }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup JDK
-        uses: actions/setup-java@v4
-        with:
-          java-version: '21'
-          distribution: 'corretto'
-          cache: 'maven'
-
-      - name: Read version
-        id: version
-        run: echo "version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> "$GITHUB_OUTPUT"
-
       - name: Check tag exists
         uses: mukunku/tag-exists-action@v1.6.0
         id: tag-check
         with:
-          tag: v${{ steps.version.outputs.version }}
+          tag: ${{ github.ref_name }} # v1.2.3
 
   deploy:
     runs-on: ubuntu-latest
@@ -67,7 +55,7 @@ jobs:
       - name: Create release
         uses: softprops/action-gh-release@v2
         with:
-          name: ${{ needs.precheck.outputs.version }}
-          tag_name: ${{ needs.precheck.outputs.version }}
+          name: ${{ github.ref_name }}
+          tag_name: ${{ github.ref_name }}
           generate_release_notes: true
           draft: false
