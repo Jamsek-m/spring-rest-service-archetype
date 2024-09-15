@@ -37,7 +37,7 @@ mvn versions:set -DnewVersion="$releaseVersion" -DgenerateBackupPoms=false
 
 # Commit release value
 git commit -am "Release v$releaseVersion"
-git tag "v$releaseVersion"
+git tag "release/v$releaseVersion"
 
 # Increment minor version
 newVersion=$(inc_minor_version "$releaseVersion")
