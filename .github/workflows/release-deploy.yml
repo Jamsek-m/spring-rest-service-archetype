@@ -1,0 +1,71 @@
+name: Snapshot deploy
+
+on:
+  release:
+    types:
+      - published
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+
+  precheck:
+    runs-on: ubuntu-latest
+    outputs:
+      version: v${{ steps.version.outputs.version }}
+      tag_exists: ${{ steps.tag-check.outputs.exists }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'corretto'
+          cache: 'maven'
+
+      - name: Read version
+        id: version
+        run: echo "version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> "$GITHUB_OUTPUT"
+
+      - name: Check tag exists
+        uses: mukunku/tag-exists-action@v1.6.0
+        id: tag-check
+        with:
+          tag: v${{ steps.version.outputs.version }}
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs:
+      - precheck
+    if: needs.precheck.outputs.tag_exists != 'true'
+    permissions:
+      contents: read
+      packages: write
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy
+        uses: ./.github/actions/deploy-maven.yml
+
+  create-release:
+    runs-on: ubuntu-latest
+    needs:
+      - precheck
+      - deploy
+    if: needs.precheck.outputs.tag_exists != 'true'
+    permissions:
+      contents: write
+    steps:
+      - name: Create release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: ${{ needs.precheck.outputs.version }}
+          tag_name: ${{ needs.precheck.outputs.version }}
+          generate_release_notes: true
+          draft: false

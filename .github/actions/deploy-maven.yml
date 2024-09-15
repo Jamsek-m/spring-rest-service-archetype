@@ -1,0 +1,22 @@
+name: Maven deploy action
+
+inputs:
+  mvn-settings-path:
+    description: Path to maven settings file
+    required: true
+    default: ".ci/settings.xml"
+
+runs:
+  using: composite
+
+  steps:
+
+    - name: Setup JDK
+      uses: actions/setup-java@v4
+      with:
+        java-version: '21'
+        distribution: 'corretto'
+        cache: 'maven'
+
+    - name: Deploy archetype
+      run: mvn -B deploy --settings ${{ inputs.mvn-settings-path }}

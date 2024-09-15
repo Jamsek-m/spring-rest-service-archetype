@@ -28,28 +28,11 @@
         </pluginManagement>
     </build>
 
-    <profiles>
-        <profile>
-            <id>snapshot</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <distributionManagement>
-                <repository>
-                    <id>mjamsek-snapshots</id>
-                    <url>https://nexus.mjamsek.com/repository/maven-snapshots</url>
-                </repository>
-            </distributionManagement>
-        </profile>
-        <profile>
-            <id>release</id>
-            <distributionManagement>
-                <repository>
-                    <id>mjamsek-releases</id>
-                    <url>https://nexus.mjamsek.com/repository/maven-releases</url>
-                </repository>
-            </distributionManagement>
-        </profile>
-    </profiles>
-
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub Jamsek-m Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/jamsek-m/spring-rest-service-archetype</url>
+        </repository>
+    </distributionManagement>
 </project>
