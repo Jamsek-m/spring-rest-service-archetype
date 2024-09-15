@@ -5,6 +5,9 @@ inputs:
     description: Path to maven settings file
     required: true
     default: ".ci/settings.xml"
+  github-token:
+    description: GitHub token for deploying artefact
+    required: true
 
 runs:
   using: composite
@@ -22,4 +25,4 @@ runs:
       shell: bash
       run: mvn -B deploy --settings ${{ inputs.mvn-settings-path }}
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ inputs.github-token }}

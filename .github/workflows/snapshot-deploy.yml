@@ -23,3 +23,5 @@ jobs:
 
       - name: Deploy
         uses: ./.github/actions/deploy-maven
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
